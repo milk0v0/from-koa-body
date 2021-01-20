@@ -10,7 +10,13 @@ router.get('/', ctx => {
     ctx.body = fs.readFileSync('./static/index.html');
 });
 
-app.use(KoaBody());
+app.use(KoaBody({
+    multipart: true,
+    formidable: {
+        keepExtensions: true,
+        uploadDir: './public'
+    }
+}));
 
 router.post('/post', ctx => {
     console.log(ctx.request.body);
